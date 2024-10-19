@@ -108,5 +108,314 @@
             "State & Component"
         ],
         "answer": "State & Props"
+    },
+
+    {
+        "id": "11",
+        "question": "What does the 'alt' attribute in an image tag do?",
+        "options": [
+            "Specifies an alternate text for the image",
+            "Sets the image's alignment",
+            "Defines the image's width",
+            "Specifies the image's format"
+        ],
+        "answer": "Specifies an alternate text for the image"
+    },
+    {
+        "id": "12",
+        "question": "Which CSS property is used to change the background color?",
+        "options": [
+            "color",
+            "background-color",
+            "bgcolor",
+            "color-background"
+        ],
+        "answer": "background-color"
+    },
+    {
+        "id": "13",
+        "question": "What is a closure in JavaScript?",
+        "options": [
+            "A way to encapsulate variables",
+            "A block of code that can be reused",
+            "A method of error handling",
+            "A way to manage asynchronous requests"
+        ],
+        "answer": "A way to encapsulate variables"
+    },
+    {
+        "id": "14",
+        "question": "Which command is used to install packages in Node.js?",
+        "options": [
+            "npm install <package-name>",
+            "node install <package-name>",
+            "npm get <package-name>",
+            "install <package-name>"
+        ],
+        "answer": "npm install <package-name>"
+    },
+    {
+        "id": "15",
+        "question": "Which of the following is used to define a route in Express.js?",
+        "options": [
+            "app.route()",
+            "app.get()",
+            "app.post()",
+            "All of the above"
+        ],
+        "answer": "All of the above"
+    },
+    {
+        "id": "16",
+        "question": "What does the JavaScript function 'setTimeout()' do?",
+        "options": [
+            "Executes a function after a specified number of milliseconds",
+            "Executes a function at regular intervals",
+            "Pauses the execution of the script",
+            "None of the above"
+        ],
+        "answer": "Executes a function after a specified number of milliseconds"
+    },
+    {
+        "id": "17",
+        "question": "Which HTML element is used to create an unordered list?",
+        "options": [
+            "<ol>",
+            "<ul>",
+            "<li>",
+            "<list>"
+        ],
+        "answer": "<ul>"
+    },
+    {
+        "id": "18",
+        "question": "In CSS, which selector is used to select an element with a specific ID?",
+        "options": [
+            ".classname",
+            "#idname",
+            "elementname",
+            "*"
+        ],
+        "answer": "#idname"
+    },
+    {
+        "id": "19",
+        "question": "Which method can be used to parse JSON data in JavaScript?",
+        "options": [
+            "JSON.parse()",
+            "JSON.stringify()",
+            "JSON.decode()",
+            "JSON.convert()"
+        ],
+        "answer": "JSON.parse()"
+    },
+    {
+        "id": "20",
+        "question": "What is the purpose of the `<head>` tag in HTML?",
+        "options": [
+            "To contain metadata and links to stylesheets",
+            "To display the main content of the page",
+            "To define the footer of the document",
+            "To create a navigation menu"
+        ],
+        "answer": "To contain metadata and links to stylesheets"
+    },
+    {
+        "id": "21",
+        "question": "Which CSS property is used to control the spacing between elements?",
+        "options": [
+            "margin",
+            "padding",
+            "border",
+            "spacing"
+        ],
+        "answer": "margin"
+    },
+    {
+        "id": "22",
+        "question": "What is a promise in JavaScript?",
+        "options": [
+            "A way to handle asynchronous operations",
+            "A type of function",
+            "A loop structure",
+            "A method for error handling"
+        ],
+        "answer": "A way to handle asynchronous operations"
+    },
+    {
+        "id": "23",
+        "question": "What command is used to start a Node.js server using Express?",
+        "options": [
+            "node app.js",
+            "express start",
+            "npm start",
+            "node server.js"
+        ],
+        "answer": "node app.js"
+    },
+    {
+        "id": "24",
+        "question": "Which of the following is a valid CSS selector?",
+        "options": [
+            "div > p",
+            "#header .nav",
+            ".class1.class2",
+            "All of the above"
+        ],
+        "answer": "All of the above"
+    },
+    {
+        "id": "25",
+        "question": "What does the `fetch()` function do in JavaScript?",
+        "options": [
+            "Makes an HTTP request",
+            "Fetches data from a database",
+            "Fetches local files",
+            "None of the above"
+        ],
+        "answer": "Makes an HTTP request"
+    },
+    {
+        "id": "26",
+        "question": "How do you add a comment in CSS?",
+        "options": [
+            "// This is a comment",
+            "/* This is a comment */",
+            "# This is a comment",
+            "<!-- This is a comment -->"
+        ],
+        "answer": "/* This is a comment */"
+    },
+    {
+        "id": "27",
+        "question": "What is the purpose of the `res.send()` method in Express.js?",
+        "options": [
+            "To send data back to the client",
+            "To send a request to the server",
+            "To end the connection",
+            "To render a view"
+        ],
+        "answer": "To send data back to the client"
+    },
+    {
+        "id": "28",
+        "question": "What does the 'typeof' operator do in JavaScript?",
+        "options": [
+            "Returns the type of a variable",
+            "Changes the type of a variable",
+            "Creates a new variable",
+            "None of the above"
+        ],
+        "answer": "Returns the type of a variable"
+    },
+    {
+        "id": "29",
+        "question": "Which HTML tag is used to define an internal style sheet?",
+        "options": [
+            "<style>",
+            "<css>",
+            "<script>",
+            "<link>"
+        ],
+        "answer": "<style>"
+    },
+    {
+        "id": "30",
+        "question": "What does CSS stand for?",
+        "options": [
+            "Cascading Style Sheets",
+            "Colorful Style Sheets",
+            "Creative Style Systems",
+            "Cascading Simple Sheets"
+        ],
+        "answer": "Cascading Style Sheets"
+    },
+    {
+        "id": "31",
+        "question": "Which of the following is a JavaScript data type?",
+        "options": [
+            "Undefined",
+            "Null",
+            "Boolean",
+            "All of the above"
+        ],
+        "answer": "All of the above"
+    },
+    {
+        "id": "32",
+        "question": "Which of the following methods is used to create a server in Node.js?",
+        "options": [
+            "http.createServer()",
+            "server.create()",
+            "node.createServer()",
+            "http.startServer()"
+        ],
+        "answer": "http.createServer()"
+    },
+    {
+        "id": "33",
+        "question": "What is the purpose of the Express.js framework?",
+        "options": [
+            "To handle HTTP requests and responses",
+            "To create user interfaces",
+            "To manage databases",
+            "To perform server-side rendering"
+        ],
+        "answer": "To handle HTTP requests and responses"
+    },
+    {
+        "id": "34",
+        "question": "How can you include an external JavaScript file in an HTML document?",
+        "options": [
+            "<script src='file.js'></script>",
+            "<script href='file.js'></script>",
+            "<script file='file.js'></script>",
+            "<link src='file.js'>"
+        ],
+        "answer": "<script src='file.js'></script>"
+    },
+    {
+        "id": "35",
+        "question": "Which CSS property controls the text size?",
+        "options": [
+            "font-size",
+            "text-size",
+            "text-style",
+            "font-style"
+        ],
+        "answer": "font-size"
+    },
+    {
+        "id": "36",
+        "question": "Which method is used to send a response back to the client in Express.js?",
+        "options": [
+            "response.send()",
+            "response.write()",
+            "response.output()",
+            "response.return()"
+        ],
+        "answer": "response.send()"
+    },
+    {
+        "id": "37",
+        "question": "What is the purpose of the 'this' keyword in JavaScript?",
+        "options": [
+            "To refer to the global object",
+            "To refer to the current object",
+            "To create a new object",
+            "None of the above"
+        ],
+        "answer": "To refer to the current object"
+    },
+    {
+        "id": "38",
+        "question": "Which HTTP method is used to submit data to a server?",
+        "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ],
+        "answer": "POST"
     }
 ]
