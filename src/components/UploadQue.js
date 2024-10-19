@@ -44,49 +44,58 @@ const UploadQue = () => {
     };
 
     return (
-        <div className="container mt-5">
-            <h2>Upload a Quiz Question</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label className="form-label">Question</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={question}
-                        onChange={(e) => setQuestion(e.target.value)}
-                        placeholder="Enter the quiz question"
-                    />
-                </div>
+        <section className='text-white text-center bg-dark vh-100 d-flex align-items-center justify-content-center'>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-8">
+                        <h1 className='fw-bold mb-4'>Upload Quiz Question</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control text-center"
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    placeholder="Enter the quiz question"
+                                    required
+                                />
+                            </div>
 
-                <div className="mb-3">
-                    <label className="form-label">Options</label>
-                    {options.map((option, index) => (
-                        <input
-                            key={index}
-                            type="text"
-                            className="form-control mb-2"
-                            value={option}
-                            onChange={(e) => handleOptionChange(index, e.target.value)}
-                            placeholder={`Option ${index + 1}`}
-                        />
-                    ))}
-                </div>
+                            <div className="mb-3">
+                                {options.map((option, index) => (
+                                    <input
+                                        key={index}
+                                        type="text"
+                                        className="form-control text-center mb-2"
+                                        value={option}
+                                        onChange={(e) => handleOptionChange(index, e.target.value)}
+                                        placeholder={`Option ${index + 1}`}
+                                        required
+                                    />
+                                ))}
+                            </div>
 
-                <div className="mb-3">
-                    <label className="form-label">Correct Answer</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        value={answer}
-                        onChange={(e) => setAnswer(e.target.value)}
-                        placeholder="Enter the correct answer"
-                    />
-                </div>
+                            <div className="mb-3">
+                                <input
+                                    type="text"
+                                    className="form-control text-center"
+                                    value={answer}
+                                    onChange={(e) => setAnswer(e.target.value)}
+                                    placeholder="Enter the correct answer"
+                                    required
+                                />
+                            </div>
 
-                <button type="submit" className="btn btn-primary">Upload Question</button>
-            </form>
-        </div>
+                            <button type="submit" className="btn px-4 py-2 bg-light text-dark fw-bold">
+                                Upload Question
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     );
 };
 
 export default UploadQue;
+
