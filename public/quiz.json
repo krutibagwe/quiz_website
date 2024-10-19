@@ -417,5 +417,105 @@
             "DELETE"
         ],
         "answer": "POST"
-    }
-]
+    },
+        {
+            "id": "39",
+            "question": "Which HTML element is used to define a hyperlink?",
+            "options": [
+                "<link>",
+                "<a>",
+                "<href>",
+                "<url>"
+            ],
+            "answer": "<a>"
+        },
+        {
+            "id": "40",
+            "question": "In CSS, how do you select all `<p>` elements within a `<div>`?",
+            "options": [
+                "div p",
+                "div.p",
+                "div+p",
+                "div > p"
+            ],
+            "answer": "div p"
+        },
+        {
+            "id": "41",
+            "question": "Which built-in method can be used to convert a string to an integer in JavaScript?",
+            "options": [
+                "parseInt()",
+                "convert()",
+                "toInteger()",
+                "int()"
+            ],
+            "answer": "parseInt()"
+        },
+        {
+            "id": "42",
+            "question": "What is middleware in Express.js?",
+            "options": [
+                "Functions that have access to the request and response objects",
+                "Database interaction functions",
+                "Frontend components",
+                "Error handling utilities"
+            ],
+            "answer": "Functions that have access to the request and response objects"
+        },
+        {
+            "id": "43",
+            "question": "Which CSS property is used to make the text bold?",
+            "options": [
+                "font-weight",
+                "font-style",
+                "text-bold",
+                "font-size"
+            ],
+            "answer": "font-weight"
+        },
+        {
+            "id": "44",
+            "question": "What is the purpose of the 'return' statement in a function?",
+            "options": [
+                "To exit the function and return a value",
+                "To call another function",
+                "To end the script",
+                "To define a variable"
+            ],
+            "answer": "To exit the function and return a value"
+        },
+        {
+            "id": "45",
+            "question": "Which HTTP status code indicates a successful request?",
+            "options": [
+                "200",
+                "404",
+                "500",
+                "301"
+            ],
+            "answer": "200"
+        },
+        {
+            "id": "46",
+            "question": "How can you create a single-line comment in JavaScript?",
+            "options": [
+                "// This is a comment",
+                "/* This is a comment */",
+                "# This is a comment",
+                "<!-- This is a comment -->"
+            ],
+            "answer": "// This is a comment"
+        },
+        {
+            "id": "47",
+            "question": "What does the `console.log()` function do?",
+            "options": [
+                "Outputs a message to the web console",
+                "Displays an alert box",
+                "Writes to a file",
+                "None of the above"
+            ],
+            "answer": "Outputs a message to the web console"
+        }
+    ]
+    
