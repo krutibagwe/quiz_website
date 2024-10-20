@@ -2,11 +2,14 @@
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase'; // Import Firestore configuration
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 const UploadQue = () => {
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState(['', '', '', '']);
     const [answer, setAnswer] = useState('');
+    const [error, setError] = useState(''); // For error messages
+    const navigate = useNavigate(); // Initialize useNavigate for redirection
 
     // Update options array dynamically
     const handleOptionChange = (index, value) => {
@@ -20,7 +23,7 @@ const UploadQue = () => {
         e.preventDefault();
 
         if (!question || options.some(option => option === '') || !answer) {
-            alert('Please fill in all fields!');
+            setError('Please fill in all fields!'); // Set error message
             return;
         }
 
@@ -35,11 +38,12 @@ const UploadQue = () => {
             setQuestion('');
             setOptions(['', '', '', '']);
             setAnswer('');
+            setError(''); // Clear error
 
             alert('Question uploaded successfully!');
         } catch (error) {
             console.error('Error uploading question: ', error);
-            alert('Failed to upload question. Please try again.');
+            setError('Failed to upload question. Please try again.'); // Set error message
         }
     };
 
@@ -49,6 +53,7 @@ const UploadQue = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <h1 className='fw-bold mb-4'>Upload Quiz Question</h1>
+                        {error && <div className="alert alert-danger">{error}</div>} {/* Error message */}
                         <form onSubmit={handleSubmit}>
                             <div className="mb-3">
                                 <input
