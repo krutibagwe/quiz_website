@@ -94,73 +94,87 @@
 // export default DataContext;
 // src/context/dataContext.js
 // src/context/dataContext.js
-import React, { createContext, useState } from 'react';
-import { db } from '../firebase'; // Firestore database import
-import { collection, getDocs } from 'firebase/firestore';
-import shuffleArray from '../utils/shuffle'; // Shuffle utility
+import { createContext, useState, useEffect } from "react";
+import { db } from "../firebase"; // Import your Firebase config
+import { collection, getDocs } from "firebase/firestore"; // Firestore methods
+import shuffleArray from "../utils/shuffle"; // Import the shuffle utility
 
-const DataContext = createContext();
+const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-    const [quizs, setQuizs] = useState([]); // Store shuffled quiz questions
-    const [questionIndex, setQuestionIndex] = useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
-    const [correctAnswer, setCorrectAnswer] = useState(null);
+    // State variables
+    const [quizs, setQuizs] = useState([]); // Store quizzes
+    const [question, setQuestion] = useState({}); // Current question
+    const [questionIndex, setQuestionIndex] = useState(0); // Current question index
+    const [correctAnswer, setCorrectAnswer] = useState(''); // Correct answer for the current question
+    const [selectedAnswer, setSelectedAnswer] = useState(''); // User's selected answer
+    const [marks, setMarks] = useState(0); // User's marks
 
-    // Fetch questions from Firestore and shuffle them
-    const startQuiz = async () => {
-        try {
-            const quizCollectionRef = collection(db, 'quizzes');
-            const quizSnapshot = await getDocs(quizCollectionRef);
-            const allQuestions = quizSnapshot.docs.map(doc => doc.data());
+    // Function to fetch quizzes from Firestore
+    const fetchQuizzes = async () => {
+        const quizCollection = collection(db, "quizzes"); // Reference to the quizzes collection
+        const quizSnapshot = await getDocs(quizCollection); // Fetch documents
+        const quizzesData = quizSnapshot.docs.map(doc => ({
+            id: doc.id,
+            question: doc.data().question, // Get the question
+            options: doc.data().options, // Get the options array
+            answer: doc.data().answer // Get the answer
+        })); // Map to data
 
-            // Debugging Log - Check if questions are fetched
-            console.log('Fetched Questions:', allQuestions);
+        // Shuffle the quizzes and select the first 10
+        const shuffledQuizzes = shuffleArray(quizzesData);
+        setQuizs(shuffledQuizzes.slice(0, 10)); // Set only 10 random quizzes
+    };
 
-            // Shuffle questions and take the first 10
-            const shuffledQuestions = shuffleArray(allQuestions).slice(0, 10);
-            
-            // Debugging Log - Check if questions are shuffled and sliced
-            console.log('Shuffled and Sliced Questions (10):', shuffledQuestions);
+    // Load quiz data from Firestore when the component mounts
+    useEffect(() => {
+        fetchQuizzes();
+    }, []);
 
-            setQuizs(shuffledQuestions); // Set shuffled questions in state
-            setQuestionIndex(0); // Reset to the first question
-        } catch (error) {
-            console.error("Error fetching quiz questions: ", error);
+    // Set a Single Question
+    useEffect(() => {
+        if (quizs.length > 0 && questionIndex < quizs.length) {
+            setQuestion(quizs[questionIndex]); // Set current question based on index
+        }
+    }, [quizs, questionIndex]);
+
+    // Start Quiz
+    const startQuiz = () => {
+        setMarks(0);
+        setQuestionIndex(0);
+        setSelectedAnswer('');
+        setCorrectAnswer('');
+        fetchQuizzes(); // Fetch new quizzes each time the quiz is started
+    };
+
+    // Check Answer
+    const checkAnswer = (selected) => {
+        if (!selectedAnswer) {
+            setCorrectAnswer(question.answer); // Set the correct answer
+            setSelectedAnswer(selected); // Set the selected answer
+            if (selected === question.answer) {
+                setMarks(marks + 5); // Increment marks if the answer is correct
+            }
         }
     };
 
-    const checkAnswer = (event, selectedOption) => {
-        setSelectedAnswer(selectedOption);
-        if (quizs[questionIndex]?.answer === selectedOption) {  // Updated from 'correctAnswer' to 'answer'
-            setCorrectAnswer(selectedOption);
-        }
-    };
-
+    // Next Question
     const nextQuestion = () => {
-        setSelectedAnswer(null);
-        setCorrectAnswer(null);
-        if (questionIndex < quizs.length - 1) {
-            setQuestionIndex(prevIndex => prevIndex + 1);
-        }
+        setCorrectAnswer(''); // Reset correct answer state
+        setSelectedAnswer(''); // Reset selected answer state
+        setQuestionIndex(prevIndex => prevIndex + 1); // Move to the next question
     };
 
+    // Show Result (implement this function based on your UI needs)
     const showTheResult = () => {
-        console.log('Quiz completed! Show the results');
+        // Handle showing result logic here
     };
 
     return (
-        <DataContext.Provider
-            value={{
-                quizs,
-                questionIndex,
-                selectedAnswer,
-                correctAnswer,
-                startQuiz,
-                checkAnswer,
-                nextQuestion,
-                showTheResult
-            }}>
+        <DataContext.Provider value={{
+            startQuiz, question, quizs, checkAnswer, correctAnswer,
+            selectedAnswer, questionIndex, nextQuestion, showTheResult, marks
+        }}>
             {children}
         </DataContext.Provider>
     );

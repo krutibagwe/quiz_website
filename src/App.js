@@ -54,6 +54,7 @@ import Signup from './components/Signup';
 import Start from './components/Start';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
+import UploadQue from './components/UploadQue';
 
 function App() {
     return (
@@ -66,10 +67,10 @@ function App() {
                 <Route path="/start" element={<Start />} />
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/result" element={<Result />} />
+                <Route path="/upload-question" element={<UploadQue/>}/>
             </Routes>
         </Router>
     );
 }
 
 export default App;
-

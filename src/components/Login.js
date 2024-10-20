@@ -1,5 +1,7 @@
+// src/components/Login.js
+
 import React, { useState } from 'react';
-import { auth } from '../firebase';
+import { auth } from '../firebase'; // Ensure firebase is properly set up
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,20 +12,19 @@ const Login = () => {
 
     const navigate = useNavigate(); // Hook for navigation
 
-    // Handle Login
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            console.log(`User Logged In:`, email);
-            // After successful login, navigate to the Start page
-            navigate('/start'); 
+            console.log('User Logged In:', email);
+            // Navigate to Start page after successful login
+            navigate('/start');
         } catch (err) {
-            setError(err.message); // Show error if login fails
+            setError(err.message); // Display error if login fails
         }
     };
 
-    // Navigate to Signup
+    // Navigate to Signup page
     const goToSignup = () => {
         navigate('/signup');
     };
@@ -33,8 +34,7 @@ const Login = () => {
             <div className="container h-100">
                 <div className="row h-100 align-items-center justify-content-center">
                     <div className="col-lg-6">
-                        <h1 className='fw-bold mb-4'>Login</h1>
-                        {/* Show error message */}
+                        <h1 className="fw-bold mb-4">Login</h1>
                         {error && <div className="alert alert-danger">{error}</div>}
                         <form onSubmit={handleLogin} className="card p-4 bg-secondary">
                             <div className="mb-3">
@@ -57,11 +57,13 @@ const Login = () => {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="btn btn-light fw-bold w-100">Login</button>
+                            <button type="submit" className="btn btn-light fw-bold w-100">
+                                Login
+                            </button>
                             <p className="mt-3 text-light">
-                                Don't have an account? 
-                                <span 
-                                    onClick={goToSignup} 
+                                Don't have an account?{' '}
+                                <span
+                                    onClick={goToSignup}
                                     style={{ cursor: 'pointer', textDecoration: 'underline' }}>
                                     Sign Up
                                 </span>
