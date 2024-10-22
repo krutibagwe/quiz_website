@@ -1,17 +1,16 @@
 // src/components/UploadQue.js
 import React, { useState } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase'; // Import Firestore configuration
-import { useNavigate } from 'react-router-dom'; // For navigation
+import { db } from '../firebase'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const UploadQue = () => {
     const [question, setQuestion] = useState('');
     const [options, setOptions] = useState(['', '', '', '']);
     const [answer, setAnswer] = useState('');
-    const [error, setError] = useState(''); // For error messages
-    const navigate = useNavigate(); // Initialize useNavigate for redirection
+    const [error, setError] = useState(''); 
+    const navigate = useNavigate();
 
-    // Update options array dynamically
     const handleOptionChange = (index, value) => {
         const newOptions = [...options];
         newOptions[index] = value;
@@ -23,7 +22,7 @@ const UploadQue = () => {
         e.preventDefault();
 
         if (!question || options.some(option => option === '') || !answer) {
-            setError('Please fill in all fields!'); // Set error message
+            setError('Please fill in all fields!'); 
             return;
         }
 
@@ -34,16 +33,15 @@ const UploadQue = () => {
                 answer: answer
             });
 
-            // Reset form after successful submission
             setQuestion('');
             setOptions(['', '', '', '']);
             setAnswer('');
-            setError(''); // Clear error
+            setError('');
 
             alert('Question uploaded successfully!');
         } catch (error) {
             console.error('Error uploading question: ', error);
-            setError('Failed to upload question. Please try again.'); // Set error message
+            setError('Failed to upload question. Please try again.'); 
         }
     };
 

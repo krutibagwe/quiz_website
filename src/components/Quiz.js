@@ -1,35 +1,32 @@
-
 // src/components/Quiz.js
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Add useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import DataContext from '../context/dataContext';
 
 const Quiz = () => {
     const { quizs, questionIndex, checkAnswer, nextQuestion } = useContext(DataContext);
-    const [selectedAnswer, setSelectedAnswer] = useState(null); // Track selected answer
-    const [isAnswerChecked, setIsAnswerChecked] = useState(false); // Track if answer has been checked
-    const navigate = useNavigate(); // useNavigate hook
+    const [selectedAnswer, setSelectedAnswer] = useState(null); 
+    const [isAnswerChecked, setIsAnswerChecked] = useState(false); 
+    const navigate = useNavigate(); 
 
     const question = quizs[questionIndex];
 
-    // Handle answer selection
     const handleAnswerClick = (item) => {
         if (!isAnswerChecked) {
             setSelectedAnswer(item);
             setIsAnswerChecked(true);
-            checkAnswer(item); // Check the selected answer
+            checkAnswer(item); 
         }
     };
 
-    // Move to the next question or show the result if it's the last question
     const handleNextQuestion = () => {
-        setSelectedAnswer(null); // Reset selected answer
-        setIsAnswerChecked(false); // Reset answer checked state
+        setSelectedAnswer(null); 
+        setIsAnswerChecked(false); 
 
         if (questionIndex + 1 < quizs.length) {
-            nextQuestion(); // Move to the next question
+            nextQuestion(); 
         } else {
-            navigate('/result'); // Navigate to result page after the last question
+            navigate('/result'); 
         }
     };
 
@@ -60,7 +57,7 @@ const Quiz = () => {
                                             isAnswerChecked && item !== question.answer && selectedAnswer === item ? 'bg-danger' : ''
                                         }`}
                                         onClick={() => handleAnswerClick(item)}
-                                        disabled={isAnswerChecked} // Disable buttons after answer is selected
+                                        disabled={isAnswerChecked} 
                                     >
                                         {item}
                                     </button>
@@ -70,7 +67,7 @@ const Quiz = () => {
                             <button
                                 className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
                                 onClick={handleNextQuestion}
-                                disabled={!selectedAnswer}  // Button is disabled until an answer is selected
+                                disabled={!selectedAnswer}  
                             >
                                 {questionIndex + 1 === quizs.length ? 'Show Result' : 'Next Question'}
                             </button>
