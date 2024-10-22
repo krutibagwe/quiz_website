@@ -1,7 +1,6 @@
 // src/components/Login.js
-
 import React, { useState } from 'react';
-import { auth } from '../firebase'; // Ensure firebase is properly set up
+import { auth } from '../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,21 +9,19 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate(); 
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User Logged In:', email);
-            // Navigate to Start page after successful login
             navigate('/start');
         } catch (err) {
-            setError(err.message); // Display error if login fails
+            setError(err.message); 
         }
     };
 
-    // Navigate to Signup page
     const goToSignup = () => {
         navigate('/signup');
     };
