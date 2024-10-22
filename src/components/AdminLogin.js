@@ -10,25 +10,22 @@ const AdminLogin = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    // Predefined admin email
-    const adminEmail = 'admin@gmail.com'; // Replace with your actual admin email
+    const adminEmail = 'admin@gmail.com'; 
 
     const handleAdminLogin = async (e) => {
         e.preventDefault();
         try {
-            // Sign in with Firebase authentication
             await signInWithEmailAndPassword(auth, email, password);
 
-            // Check if the logged-in email matches the admin email
             if (email !== adminEmail) {
                 setError("You're not authorized to log in as Admin.");
                 return;
             }
 
             console.log("Admin Logged In:", email);
-            navigate('/upload-question'); // Navigate to the Upload Question page for Admin
+            navigate('/upload-question'); 
         } catch (err) {
-            setError(err.message); // Display error message on failed login
+            setError(err.message);  
         }
     };
 
@@ -38,7 +35,7 @@ const AdminLogin = () => {
                 <div className="row h-100 align-items-center justify-content-center">
                     <div className="col-lg-6">
                         <h1 className='fw-bold mb-4'>Admin Login</h1>
-                        {error && <div className="alert alert-danger">{error}</div>} {/* Display errors */}
+                        {error && <div className="alert alert-danger">{error}</div>} 
                         <form onSubmit={handleAdminLogin} className="card p-4 bg-secondary">
                             <div className="mb-3">
                                 <input

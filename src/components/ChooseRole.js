@@ -6,11 +6,11 @@ const ChooseRole = () => {
     const navigate = useNavigate();
 
     const goToAdminLogin = () => {
-        navigate('/admin-login'); // Navigate to Admin Login
+        navigate('/admin-login'); 
     };
 
     const goToStudentLogin = () => {
-        navigate('/login'); // Navigate to Student Login
+        navigate('/login'); 
     };
 
     return (
