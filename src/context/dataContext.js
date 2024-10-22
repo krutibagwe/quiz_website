@@ -93,7 +93,7 @@
 
 // export default DataContext;
 // src/context/dataContext.js
-// src/context/dataContext.js
+
 import { createContext, useState, useEffect } from "react";
 import { db } from "../firebase"; // Assuming Firebase is already configured
 import { collection, getDocs } from "firebase/firestore";
