@@ -1,20 +1,14 @@
 // src/components/Quiz.js
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Add useNavigate
 import DataContext from '../context/dataContext';
 
 const Quiz = () => {
-    const {
-        quizs,                 // The array of quiz questions
-        questionIndex,          // Current question index
-        checkAnswer,            // Function to check the user's answer
-        nextQuestion,           // Function to move to the next question
-        showTheResult           // Function to show the result at the end
-    } = useContext(DataContext);
-
+    const { quizs, questionIndex, checkAnswer, nextQuestion } = useContext(DataContext);
     const [selectedAnswer, setSelectedAnswer] = useState(null); // Track selected answer
     const [isAnswerChecked, setIsAnswerChecked] = useState(false); // Track if answer has been checked
+    const navigate = useNavigate(); // useNavigate hook
 
-    // Get the current question from the quiz array based on the index
     const question = quizs[questionIndex];
 
     // Handle answer selection
@@ -26,14 +20,18 @@ const Quiz = () => {
         }
     };
 
-    // Move to the next question and reset state
+    // Move to the next question or show the result if it's the last question
     const handleNextQuestion = () => {
-        setSelectedAnswer(null);     // Reset selected answer
-        setIsAnswerChecked(false);   // Reset answer checked state
-        nextQuestion();              // Move to the next question
+        setSelectedAnswer(null); // Reset selected answer
+        setIsAnswerChecked(false); // Reset answer checked state
+
+        if (questionIndex + 1 < quizs.length) {
+            nextQuestion(); // Move to the next question
+        } else {
+            navigate('/result'); // Navigate to result page after the last question
+        }
     };
 
-    // If the quiz is still loading or no question is found
     if (!question) {
         return <div className="text-center text-white">Loading quiz...</div>;
     }
@@ -44,7 +42,6 @@ const Quiz = () => {
                 <div className="row vh-100 align-items-center justify-content-center">
                     <div className="col-lg-8">
                         <div className="card p-4" style={{ background: '#3d3d3d', borderColor: '#646464' }}>
-                            {/* Question Text */}
                             <div className="d-flex justify-content-between gap-md-3">
                                 <h5 className='mb-2 fs-normal lh-base'>{question.question}</h5>
                                 <h5 style={{ color: '#60d600', width: '100px', textAlign: 'right' }}>
@@ -52,7 +49,6 @@ const Quiz = () => {
                                 </h5>
                             </div>
 
-                            {/* Options */}
                             <div>
                                 {question.options.map((item, index) => (
                                     <button
@@ -70,24 +66,13 @@ const Quiz = () => {
                                 ))}
                             </div>
 
-                            {/* Next or Show Result Button */}
-                            {(questionIndex + 1) !== quizs.length ? (
-                                <button
-                                    className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
-                                    onClick={handleNextQuestion}
-                                    disabled={!selectedAnswer}  // Button is disabled until an answer is selected
-                                >
-                                    Next Question
-                                </button>
-                            ) : (
-                                <button
-                                    className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
-                                    onClick={showTheResult}
-                                    disabled={!selectedAnswer}  // Button is disabled until an answer is selected
-                                >
-                                    Show Result
-                                </button>
-                            )}
+                            <button
+                                className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
+                                onClick={handleNextQuestion}
+                                disabled={!selectedAnswer}  // Button is disabled until an answer is selected
+                            >
+                                {questionIndex + 1 === quizs.length ? 'Show Result' : 'Next Question'}
+                            </button>
                         </div>
                     </div>
                 </div>

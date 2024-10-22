@@ -95,85 +95,60 @@
 // src/context/dataContext.js
 // src/context/dataContext.js
 import { createContext, useState, useEffect } from "react";
-import { db } from "../firebase"; // Import your Firebase config
-import { collection, getDocs } from "firebase/firestore"; // Firestore methods
-import shuffleArray from "../utils/shuffle"; // Import the shuffle utility
+import { db } from "../firebase"; // Assuming Firebase is already configured
+import { collection, getDocs } from "firebase/firestore";
+import shuffleArray from "../utils/shuffle"; // Assuming shuffle utility is available
 
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-    // State variables
     const [quizs, setQuizs] = useState([]); // Store quizzes
-    const [question, setQuestion] = useState({}); // Current question
     const [questionIndex, setQuestionIndex] = useState(0); // Current question index
-    const [correctAnswer, setCorrectAnswer] = useState(''); // Correct answer for the current question
-    const [selectedAnswer, setSelectedAnswer] = useState(''); // User's selected answer
     const [marks, setMarks] = useState(0); // User's marks
 
     // Function to fetch quizzes from Firestore
     const fetchQuizzes = async () => {
-        const quizCollection = collection(db, "quizzes"); // Reference to the quizzes collection
-        const quizSnapshot = await getDocs(quizCollection); // Fetch documents
+        const quizCollection = collection(db, "quizzes");
+        const quizSnapshot = await getDocs(quizCollection);
         const quizzesData = quizSnapshot.docs.map(doc => ({
             id: doc.id,
-            question: doc.data().question, // Get the question
-            options: doc.data().options, // Get the options array
-            answer: doc.data().answer // Get the answer
-        })); // Map to data
+            question: doc.data().question,
+            options: doc.data().options,
+            answer: doc.data().answer
+        }));
 
         // Shuffle the quizzes and select the first 10
         const shuffledQuizzes = shuffleArray(quizzesData);
-        setQuizs(shuffledQuizzes.slice(0, 10)); // Set only 10 random quizzes
+        setQuizs(shuffledQuizzes.slice(0, 10));
     };
 
-    // Load quiz data from Firestore when the component mounts
+    // Load quiz data when the component mounts
     useEffect(() => {
         fetchQuizzes();
     }, []);
-
-    // Set a Single Question
-    useEffect(() => {
-        if (quizs.length > 0 && questionIndex < quizs.length) {
-            setQuestion(quizs[questionIndex]); // Set current question based on index
-        }
-    }, [quizs, questionIndex]);
 
     // Start Quiz
     const startQuiz = () => {
         setMarks(0);
         setQuestionIndex(0);
-        setSelectedAnswer('');
-        setCorrectAnswer('');
-        fetchQuizzes(); // Fetch new quizzes each time the quiz is started
+        fetchQuizzes(); // Fetch new quizzes when the quiz is started
     };
 
     // Check Answer
     const checkAnswer = (selected) => {
-        if (!selectedAnswer) {
-            setCorrectAnswer(question.answer); // Set the correct answer
-            setSelectedAnswer(selected); // Set the selected answer
-            if (selected === question.answer) {
-                setMarks(marks + 5); // Increment marks if the answer is correct
-            }
+        if (selected === quizs[questionIndex].answer) {
+            setMarks(marks + 1); // Increment marks by 5 for a correct answer
         }
     };
 
-    // Next Question
+    // Move to the Next Question
     const nextQuestion = () => {
-        setCorrectAnswer(''); // Reset correct answer state
-        setSelectedAnswer(''); // Reset selected answer state
-        setQuestionIndex(prevIndex => prevIndex + 1); // Move to the next question
-    };
-
-    // Show Result (implement this function based on your UI needs)
-    const showTheResult = () => {
-        // Handle showing result logic here
+        setQuestionIndex(prevIndex => prevIndex + 1); // Move to next question
     };
 
     return (
         <DataContext.Provider value={{
-            startQuiz, question, quizs, checkAnswer, correctAnswer,
-            selectedAnswer, questionIndex, nextQuestion, showTheResult, marks
+            startQuiz, quizs, checkAnswer, questionIndex, marks, nextQuestion
         }}>
             {children}
         </DataContext.Provider>

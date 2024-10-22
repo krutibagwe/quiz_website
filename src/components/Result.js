@@ -1,8 +1,10 @@
 // src/components/Result.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DataContext from '../context/dataContext';
 
 const Result = () => {
+    const { marks, quizs } = useContext(DataContext); // Get marks and quizs from context
     const navigate = useNavigate();
 
     const goToStart = () => {
@@ -10,10 +12,9 @@ const Result = () => {
     };
 
     return (
-        <div>
+        <div className="container text-center">
             <h2>Your Quiz Results</h2>
-            {/* Display the user's results here */}
-
+            <p>You scored {marks} out of {quizs.length } points!</p> {/* Assuming 5 points per question */}
             <button onClick={goToStart} className="btn btn-primary">
                 Go to Start
             </button>
