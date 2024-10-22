@@ -1,43 +1,40 @@
 // src/components/Signup.js
-
 import React, { useState } from 'react';
-import { auth, db } from '../firebase'; // Make sure to import Firestore
+import { auth, db } from '../firebase'; 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore'; // Import Firestore functions
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { setDoc, doc } from 'firebase/firestore'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState(''); // First name state
-    const [surname, setSurname] = useState(''); // Surname state
+    const [firstName, setFirstName] = useState(''); 
+    const [surname, setSurname] = useState(''); 
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); 
 
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            // Create user in Firebase Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Create a document in Firestore for the user
             await setDoc(doc(db, 'users', user.uid), {
                 firstName: firstName,
                 surname: surname,
                 email: email,
-                role: 'Student' // You can set the role here, adjust as needed
+                role: 'Student' 
             });
 
             console.log("User created in Firebase and Firestore:", user);
-            navigate('/login'); // Navigate to login after successful signup
+            navigate('/login'); 
         } catch (err) {
             setError(err.message);
         }
     };
 
     const goToLogin = () => {
-        navigate('/login'); // Navigate to the login page
+        navigate('/login'); 
     };
 
     return (

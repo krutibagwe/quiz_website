@@ -1,16 +1,15 @@
 // src/components/Start.js
-
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DataContext from '../context/dataContext';
 
 const Start = () => {
     const { startQuiz } = useContext(DataContext);
-    const navigate = useNavigate(); // Hook for navigation
+    const navigate = useNavigate(); 
 
     const handleStartQuiz = async () => {
-        await startQuiz(); // Initiate quiz and prepare questions
-        navigate('/quiz'); // Navigate to quiz page
+        await startQuiz(); 
+        navigate('/quiz'); 
     };
 
     return (
